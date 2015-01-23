@@ -1,0 +1,40 @@
+{
+  "name": "amd-inject-loader",
+  "version": "0.0.1",
+  "description": "A simple webpack inject loader for AMD-style code",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha spec/spec.js",
+    "test-ci": "mocha -w spec/spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:LeanKit-Labs/amd-inject-loader.git"
+  },
+  "keywords": [
+    "webpack",
+    "loader"
+  ],
+  "author": "Doug Neiner <doug@dougneiner.com>",
+  "contributors": [
+    {
+      "name": "Doug Neiner",
+      "email": "doug@dougneiner.com",
+      "url": "http://code.dougneiner.com"
+    },
+    {
+      "name": "Ryan Niemeyer",
+      "email": "ryan@knockmeout.net",
+      "url": "http://knockmeout.net"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LeanKit-Labs/amd-inject-loader/issues"
+  },
+  "homepage": "https://github.com/LeanKit-Labs/amd-inject-loader",
+  "devDependencies": {
+    "mocha": "^2.1.0",
+    "should": "^4.6.1"
+  }
+}
