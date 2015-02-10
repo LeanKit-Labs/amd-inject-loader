@@ -37,6 +37,22 @@ myfile.init(); // Outputs A new run definition
 
 ```
 
+## Options
+
+To customize options (currently only one option is supported), add a `amdInjectLoader` key to your webpack config file:
+
+```js
+{
+	loaders: [ ... ],
+	...
+	amdInjectLoader: {
+		istanbul: true
+	}
+}
+```
+
+* **`istanbul`** - `true` or `false` (Defaults to `false`) – Include istanbul ignore blocks on the lines that handle the injection
+
 
 [Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
 

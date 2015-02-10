@@ -1,6 +1,9 @@
 module.exports = function( input ) {
 	this.cacheable = true;
 
+	var options = this.options.amdInjectLoader || {};
+	var istanbul = options.istanbul === true;
+
 	// Match AMD define and function
 	var rCapture = /define\([ ]?(\[[\s\S]*?\]),[ ]?function[ ]?\(([^)]+)\)[ ]?{/;
 	var matched = rCapture.exec( input );
@@ -20,6 +23,9 @@ module.exports = function( input ) {
 		if ( !arg ) {
 			injectorCode.push( "require( \"" + dep + "\" );" );
 		} else {
+			if ( istanbul ) {
+				injectorCode.push( "/* istanbul ignore next - the following line of code is used for dependency injection */" );
+			}
 			injectorCode.push( "var " + arg + " = injections.hasOwnProperty(\"" + dep + "\") ? injections[\"" + dep + "\"] : require( \"" + dep + "\" );" );
 		}
 	} );
