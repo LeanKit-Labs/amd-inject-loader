@@ -5,12 +5,12 @@ var er = require( "enhanced-require" )( module );
 describe( "amd-inject-loader", function() {
 	it( "should throw an error when used with incompatible formats", function() {
 		( function() {
-			callLoader( "var d = require( 'lodash' );" );
-		} ).should.throw();
+			er( "../index.js!./examples/invalid-commonjs" );
+		} ).should.throw( /files with dependencies/ );
 
 		( function() {
-			callLoader( "define({ val: true });" );
-		} ).should.throw();
+			er( "../index.js!./examples/invalid-amd" );
+		} ).should.throw( /files with dependencies/ );
 	} );
 	it( "should transform the file correctly", function() {
 		var factory = er( "../index.js!./examples/simple" );
