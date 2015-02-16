@@ -37,7 +37,9 @@
   },
   "homepage": "https://github.com/LeanKit-Labs/amd-inject-loader",
   "devDependencies": {
+    "enhanced-require": "^0.4.2",
     "mocha": "^2.1.0",
-    "should": "^4.6.1"
+    "should": "^4.6.1",
+    "sinon": "^1.12.2"
   }
 }
