@@ -8,6 +8,8 @@
   },
   "scripts": {
     "test": "mocha spec/spec.js",
+    "coverage": "istanbul cover -x \"spec/**\" _mocha -- spec/spec.js",
+    "show-coverage": "open coverage/lcov-report/index.html",
     "test-ci": "mocha -w spec/spec.js"
   },
   "repository": {
@@ -37,7 +39,10 @@
   },
   "homepage": "https://github.com/LeanKit-Labs/amd-inject-loader",
   "devDependencies": {
+    "enhanced-require": "^0.4.2",
+    "istanbul": "^0.3.5",
     "mocha": "^2.1.0",
-    "should": "^4.6.1"
+    "should": "^4.6.1",
+    "sinon": "^1.12.2"
   }
 }
