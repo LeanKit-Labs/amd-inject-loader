@@ -26,7 +26,7 @@ module.exports = function( input ) {
 			if ( istanbul ) {
 				injectorCode.push( "/* istanbul ignore next - the following line of code is used for dependency injection */" );
 			}
-			injectorCode.push( "var " + arg + " = injections.hasOwnProperty(\"" + dep + "\") ? injections[\"" + dep + "\"] : require( \"" + dep + "\" );" );
+			injectorCode.push( "var " + arg + " = ( injections && injections.hasOwnProperty(\"" + dep + "\") ) ? injections[\"" + dep + "\"] : require( \"" + dep + "\" );" );
 		}
 	} );
 
