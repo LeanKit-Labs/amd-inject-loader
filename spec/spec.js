@@ -55,8 +55,13 @@ describe( "amd-inject-loader", function() {
 		var factory = er( "../index.js!./examples/moreDeps" );
 		var resp = factory.toString();
 
-		resp.should.match( /var lodash =/ );
+		resp.should.match( /var _ =/ );
 		resp.should.match( /require\( "unreferenced" \)/ );
+
+		factory.bind( this, {
+			lodash: { each: sinon.stub() },
+			unreferenced: { somethingElse: true }
+		} ).should.not.throw();
 	} );
 
 	it( "should add istanbul ignore comments before each line when turned on", function() {

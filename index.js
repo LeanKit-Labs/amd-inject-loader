@@ -20,12 +20,12 @@ module.exports = function( input ) {
 	// Build list of CommonJS style require statements
 	dependencies.forEach( function( dep, index ) {
 		var arg = args[ index ];
+		if ( istanbul ) {
+			injectorCode.push( "/* istanbul ignore next - the following line of code is used for dependency injection */" );
+		}
 		if ( !arg ) {
-			injectorCode.push( "require( \"" + dep + "\" );" );
+			injectorCode.push( "( injections && injections.hasOwnProperty(\"" + dep + "\") ) || require( \"" + dep + "\" );" );
 		} else {
-			if ( istanbul ) {
-				injectorCode.push( "/* istanbul ignore next - the following line of code is used for dependency injection */" );
-			}
 			injectorCode.push( "var " + arg + " = ( injections && injections.hasOwnProperty(\"" + dep + "\") ) ? injections[\"" + dep + "\"] : require( \"" + dep + "\" );" );
 		}
 	} );
