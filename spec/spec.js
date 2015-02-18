@@ -11,6 +11,10 @@ describe( "amd-inject-loader", function() {
 		( function() {
 			er( "../index.js!./examples/invalid-amd" );
 		} ).should.throw( /files with dependencies/ );
+
+		( function() {
+			er( "../index.js!./examples/validNoArgs" );
+		} ).should.not.throw();
 	} );
 	it( "should transform the file correctly", function() {
 		var factory = er( "../index.js!./examples/simple" );

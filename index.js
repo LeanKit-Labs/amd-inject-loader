@@ -5,7 +5,7 @@ module.exports = function( input ) {
 	var istanbul = options.istanbul === true;
 
 	// Match AMD define and function
-	var rCapture = /define\([ ]?(\[[\s\S]*?\]),[ ]?function[ ]?\(([^)]+)\)[ ]?{/;
+	var rCapture = /define\([ ]?(\[[\s\S]*?\]),[ ]?function[ ]?\(([^)]+)?\)[ ]?{/;
 	var matched = rCapture.exec( input );
 
 	if ( !matched ) {
@@ -13,7 +13,7 @@ module.exports = function( input ) {
 	}
 
 	var dependencies = JSON.parse( matched[ 1 ].replace( /'/g, "\"" ) );
-	var args = matched[ 2 ].trim().split( /,[ ]?/g );
+	var args = ( matched[ 2 ] || "" ).trim().split( /,[ ]?/g );
 
 	var injectorCode = [];
 
