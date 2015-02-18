@@ -1,6 +1,6 @@
 {
   "name": "amd-inject-loader",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A simple webpack inject loader for AMD-style code",
   "main": "index.js",
   "publishConfig": {
