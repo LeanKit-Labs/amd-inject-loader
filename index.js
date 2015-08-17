@@ -1,5 +1,5 @@
 module.exports = function( input ) {
-	this.cacheable = true;
+	this.cacheable();
 
 	var options = this.options.amdInjectLoader || {};
 	var istanbul = options.istanbul === true;
