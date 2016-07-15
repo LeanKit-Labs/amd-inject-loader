@@ -3,6 +3,7 @@ module.exports = function( input ) {
 
 	var options = this.options.amdInjectLoader || {};
 	var istanbul = options.istanbul === true;
+	var stripComments = options.stripComments === true;
 
 	// Match AMD define and function
 	var rCapture = /define\([ ]?(\[[\s\S]*?\]),[ ]?function[ ]?\(([^)]+)?\)[ ]?{/;
@@ -11,8 +12,17 @@ module.exports = function( input ) {
 	if ( !matched ) {
 		throw new Error( "The amd-inject-loader only supports AMD files with dependencies." );
 	}
+	var rawDependencies = matched[ 1 ];
 
-	var dependencies = JSON.parse( matched[ 1 ].replace( /'/g, "\"" ) );
+	if ( stripComments ) {
+		rawDependencies = rawDependencies.replace(/\/\/.+/ig, '');
+	}
+
+	try {
+		var dependencies = JSON.parse( rawDependencies.replace( /'/g, "\"" ) );
+	} catch (e) {
+		throw new Error( "JSON parsing failed in amd-inject-loader." );
+	}
 	var args = ( matched[ 2 ] || "" ).trim().split( /,[ ]?/g );
 
 	var injectorCode = [];

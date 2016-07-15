@@ -46,6 +46,28 @@ describe( "amd-inject-loader", function() {
 		stub.calledOnce.should.be.ok;
 		stub.calledWith( [ 1, 2, 3 ] ).should.be.ok;
 	} );
+	it( "should tranform the file correctly even when define has comments", function() {
+		var localEr = require( "enhanced-require" )( module, {
+			amdInjectLoader: {
+				stripComments: true
+			}
+		} );
+		var factory = localEr( "../index.js!./examples/multilineWithComments" );
+		var resp = factory.toString();
+
+		resp.should.match( /var _ =/ );
+
+		var stub = sinon.stub();
+
+		factory( {
+			"lodash": { each: stub },
+			"jquery": { each: stub },
+			"app/code": { each: stub }
+		} );
+
+		stub.calledOnce.should.be.ok;
+		stub.calledWith( [ 1, 2, 3 ] ).should.be.ok;
+	} );
 
 	it( "should allow the factory method to be called without any arguments", function() {
 		var factory = er( "../index.js!./examples/withInclude" );
