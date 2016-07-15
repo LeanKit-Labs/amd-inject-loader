@@ -15,7 +15,12 @@ describe( "amd-inject-loader", function() {
 		( function() {
 			er( "../index.js!./examples/validNoArgs" );
 		} ).should.not.throw();
+
+		( function() {
+			er( "../index.js!./examples/almost-valid-amd" );
+		} ).should.throw( /JSON parsing failed/ );
 	} );
+
 	it( "should transform the file correctly", function() {
 		var factory = er( "../index.js!./examples/simple" );
 		var resp = factory.toString();
@@ -31,6 +36,7 @@ describe( "amd-inject-loader", function() {
 		stub.calledOnce.should.be.ok;
 		stub.calledWith( [ 1, 2, 3 ] ).should.be.ok;
 	} );
+
 	it( "should tranform the file correctly even when define is multiline", function() {
 		var factory = er( "../index.js!./examples/multiline" );
 		var resp = factory.toString();
@@ -46,6 +52,7 @@ describe( "amd-inject-loader", function() {
 		stub.calledOnce.should.be.ok;
 		stub.calledWith( [ 1, 2, 3 ] ).should.be.ok;
 	} );
+
 	it( "should tranform the file correctly even when define has comments", function() {
 		var localEr = require( "enhanced-require" )( module, {
 			amdInjectLoader: {

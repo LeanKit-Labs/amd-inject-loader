@@ -1,4 +1,6 @@
 module.exports = function( input ) {
+	var finalDependencies;
+
 	this.cacheable();
 
 	var options = this.options.amdInjectLoader || {};
@@ -19,7 +21,7 @@ module.exports = function( input ) {
 	}
 
 	try {
-		var dependencies = JSON.parse( rawDependencies.replace( /'/g, "\"" ) );
+		finalDependencies = JSON.parse( rawDependencies.replace( /'/g, "\"" ) );
 	} catch (e) {
 		throw new Error( "JSON parsing failed in amd-inject-loader." );
 	}
@@ -28,7 +30,7 @@ module.exports = function( input ) {
 	var injectorCode = [];
 
 	// Build list of CommonJS style require statements
-	dependencies.forEach( function( dep, index ) {
+	finalDependencies.forEach( function( dep, index ) {
 		var arg = args[ index ];
 		if ( istanbul ) {
 			injectorCode.push( "/* istanbul ignore next - the following line of code is used for dependency injection */" );
