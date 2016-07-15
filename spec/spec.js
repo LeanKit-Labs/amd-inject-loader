@@ -49,7 +49,7 @@ describe( "amd-inject-loader", function() {
 	it( "should tranform the file correctly even when define has comments", function() {
 		var localEr = require( "enhanced-require" )( module, {
 			amdInjectLoader: {
-				stripComments: false
+				stripComments: true
 			}
 		} );
 		var factory = localEr( "../index.js!./examples/multilineWithComments" );
