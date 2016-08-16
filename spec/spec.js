@@ -37,6 +37,22 @@ describe( "amd-inject-loader", function() {
 		stub.calledWith( [ 1, 2, 3 ] ).should.be.ok;
 	} );
 
+	it( "should transform the file correctly when the module is named", function() {
+		var factory = er( "../index.js!./examples/simpleNamed" );
+		var resp = factory.toString();
+
+		resp.should.match( /var _ =/ );
+
+		var stub = sinon.stub();
+
+		factory( {
+			"lodash": { each: stub }
+		} );
+
+		stub.calledOnce.should.be.ok;
+		stub.calledWith( [ 1, 2, 3 ] ).should.be.ok;
+	} );
+
 	it( "should tranform the file correctly even when define is multiline", function() {
 		var factory = er( "../index.js!./examples/multiline" );
 		var resp = factory.toString();
