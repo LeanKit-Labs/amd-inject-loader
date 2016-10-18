@@ -128,4 +128,19 @@ describe( "amd-inject-loader", function() {
 		lines[ 3 ].should.equal( "\t/* istanbul ignore next - the following line of code is used for dependency injection */" );
 		lines[ 4 ].should.startWith( "\tvar React =" );
 	} );
+
+	it( "should support transformation of istanbul instrumented code", function() {
+		var factory = er( "../index.js!./examples/instrumented" );
+
+		var stub = sinon.stub();
+
+		factory( {
+			"lodash": { each: stub }
+		} );
+
+		stub.calledOnce.should.be.ok;
+		stub.calledWith( [ 1, 2, 3 ] ).should.be.ok;
+	} );
+
+
 } );
